@@ -1,18 +1,16 @@
 let stompClient = null;
 
 window.onload = () => {
-	console.log('me cargo');
 	const socket = new SockJS('/weather-stat-socket');
 	stompClient = Stomp.over(socket);
+	stompClient.debug = () => {};
 	stompClient.connect({}, (frame) => {
-		console.log('Connected: ' + frame);
 		stompClient.subscribe('/topic/weather', (weather) => {
-			console.log(JSON.parse(weather.body));
+			const {temperature, precipitation} = JSON.parse(weather.body).data;
+			document.getElementById('websocketPlaceholder').innerText = `Temperatura: Pais -> ${temperature.countryCode} Mes -> ${temperature.month} Valor -> ${temperature.stat} Precipitación: Pais -> ${precipitation.countryCode} Mes -> ${precipitation.month} Valor -> ${precipitation.stat}`;
 		});
 	});
 	setInterval(() => {
-		if (stompClient !== null) {
-			stompClient.send("/app/weather", {}, JSON.stringify({'name': 'alonso'}));
-		}
+		stompClient.send("/app/weather", {}, JSON.stringify({'name': 'alonso'}));
 	}, 10000);
 };
