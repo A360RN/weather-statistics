@@ -84,7 +84,13 @@ public class FileController {
 					String ISOCountry = currentRow.getCell(0).getStringCellValue();
 					for (int i = 1; i <= 12; i++) {
 						Double stat = parseStatToDouble(currentRow, i);
-						System.out.println(stat);
+						Stat entity = new Stat();
+						entity.setType(PRECIPITATION_TYPE);
+						entity.setMonth(i);
+						entity.setId(id);
+						entity.setCountryCode(ISOCountry);
+						entity.setStat(stat);
+						statService.insertStat(entity);
 						id++;
 					}
 				}
