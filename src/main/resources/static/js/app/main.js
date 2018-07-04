@@ -7,10 +7,12 @@ window.onload = () => {
 	stompClient.connect({}, (frame) => {
 		console.log('Connected: ' + frame);
 		stompClient.subscribe('/topic/weather', (weather) => {
-			console.log(weather);
+			console.log(JSON.parse(weather.body));
 		});
 	});
-	setTimeout(() => {
-		stompClient.send("/app/weather", {}, JSON.stringify({'name': 'alonso'}));
+	setInterval(() => {
+		if (stompClient !== null) {
+			stompClient.send("/app/weather", {}, JSON.stringify({'name': 'alonso'}));
+		}
 	}, 10000);
 };
