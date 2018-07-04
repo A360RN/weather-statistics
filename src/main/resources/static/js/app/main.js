@@ -9,6 +9,8 @@ window.onload = () => {
 		stompClient.subscribe('/topic/weather', (weather) => {
 			console.log(weather);
 		});
-		stompClient.send("/app/weather", {}, JSON.stringify({'name': 'alonso'}));
 	});
+	setTimeout(() => {
+		stompClient.send("/app/weather", {}, JSON.stringify({'name': 'alonso'}));
+	}, 10000);
 };
