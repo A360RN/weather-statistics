@@ -3,11 +3,13 @@ package pe.unmsm.fisi.WeatherStatisticsHeroku;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 @SpringBootApplication(scanBasePackages= {"pe.unmsm.fisi"})
+@EnableScheduling
 public class WeatherStatisticsHerokuApplication {
 
 	public static void main(String[] args) {
