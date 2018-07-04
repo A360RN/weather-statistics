@@ -4,19 +4,11 @@ public class Stat {
 
 	private String countryCode;
 	private Double stat;
-	private int type;
-	private Long month;
-	private Long id;
+	private Integer type;
+	private Integer month;
+	private Integer id;
 
 	public Stat() {
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getCountryCode() {
@@ -35,20 +27,28 @@ public class Stat {
 		this.stat = stat;
 	}
 
-	public int getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
-	public Long getMonth() {
+	public Integer getMonth() {
 		return month;
 	}
 
-	public void setMonth(Long month) {
+	public void setMonth(Integer month) {
 		this.month = month;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

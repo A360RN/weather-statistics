@@ -28,7 +28,11 @@ public class StatDaoImpl implements StatDao {
 		MongoDatabase weatherStatsDb = mongoClient.getDatabase("heroku_7lpvwtth");
 		MongoCollection<Document> weatherCollection = weatherStatsDb.getCollection("WEATHER_STATS");
 		
-		Document document = new Document("name", "pepito");
+		Document document = new Document("countryCode", stat.getCountryCode())
+				.append("type", stat.getType())
+				.append("month", stat.getMonth())
+				.append("randomId", stat.getId())
+				.append("value", stat.getStat());
 		
 		weatherCollection.insertOne(document);
 	}

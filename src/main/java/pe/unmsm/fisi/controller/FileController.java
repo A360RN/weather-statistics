@@ -15,10 +15,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mongodb.MongoClient;
 
+import pe.unmsm.fisi.dto.Stat;
 import pe.unmsm.fisi.service.StatService;
 
 @Controller
 public class FileController {
+	
+	private final int TEMPERATURE_TYPE = 1;
+	private final int PRECIPITATION_TYPE = 2;
 	
 	@Autowired
 	private StatService statService;
@@ -27,7 +31,6 @@ public class FileController {
 	@ResponseBody
 	public void temperatureFileUpload(@RequestParam("file") MultipartFile excel) {
 		try {
-			statService.insertStat(null);
 			XSSFWorkbook workbook = new XSSFWorkbook(excel.getInputStream());
 
 			XSSFSheet sheet = workbook.getSheetAt(0);
@@ -43,6 +46,13 @@ public class FileController {
 					String ISOCountry = currentRow.getCell(0).getStringCellValue();
 					for (int i = 1; i <= 12; i++) {
 						Double stat = parseStatToDouble(currentRow, i);
+						Stat entity = new Stat();
+						entity.setType(TEMPERATURE_TYPE);
+						entity.setMonth(i);
+						entity.setId(id);
+						entity.setCountryCode(ISOCountry);
+						entity.setStat(stat);
+						statService.insertStat(entity);
 						id++;
 					}
 				}
