@@ -11,4 +11,6 @@ public interface StatService {
 	public Stat getRandomTemperatureStat();
 	
 	public Map<String, Object> getRandomStat();
+	
+	public void insertStat(Stat stat);
 }
