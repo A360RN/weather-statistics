@@ -12,12 +12,12 @@ public class RandomWeatherController {
 
 	@Autowired
 	private StatService statService;
-	
+
 	@Autowired
 	private SimpMessagingTemplate template;
 
-	@Scheduled(fixedRate=60000)
+	@Scheduled(initialDelay = 0, fixedRate = 60000)
 	public void index() {
-		template.convertAndSend("/topic/weather",statService.getRandomStat());
+		template.convertAndSend("/topic/weather", statService.getRandomStat());
 	}
 }
