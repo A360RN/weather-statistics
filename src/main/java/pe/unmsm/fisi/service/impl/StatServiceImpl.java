@@ -47,7 +47,7 @@ public class StatServiceImpl implements StatService {
 	private int getRandomNumber() {
 		Random random = new Random();
 		
-		Long maxRandom = statDao.getStatCount();
+		Long maxRandom = statDao.getStatCount() / 2;
 		int minRandom = 0;
 		
 		return random.nextInt(maxRandom.intValue() + minRandom) + minRandom;
