@@ -1,6 +1,8 @@
 package pe.unmsm.fisi.service.impl;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,23 +16,27 @@ public class StatServiceImpl implements StatService {
 	
 	@Autowired
 	private StatDao statDao;
+	private final Integer TEMPERATURE_TYPE = 1;
+	private final Integer PRECIPITATION_TYPE = 2;
 
 	@Override
 	public Stat getRandomPrecipitationStat() {
-		// TODO Auto-generated method stub
-		return null;
+		return statDao.getStatByTypeAndRandomId(PRECIPITATION_TYPE, getRandomNumber());
 	}
 
 	@Override
 	public Stat getRandomTemperatureStat() {
-		// TODO Auto-generated method stub
-		return null;
+		return statDao.getStatByTypeAndRandomId(TEMPERATURE_TYPE, getRandomNumber());
 	}
 
 	@Override
 	public Map<String, Object> getRandomStat() {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> response = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
+		data.put("precipitation", getRandomPrecipitationStat());
+		data.put("temperature", getRandomTemperatureStat());
+		response.put("data", data);
+		return response;
 	}
 
 	@Override
@@ -38,4 +44,12 @@ public class StatServiceImpl implements StatService {
 		statDao.insertStat(stat);
 	}
 
+	private int getRandomNumber() {
+		Random random = new Random();
+		
+		Long maxRandom = statDao.getStatCount();
+		int minRandom = 0;
+		
+		return random.nextInt(maxRandom.intValue() + minRandom) + minRandom;
+	}
 }

@@ -1,16 +1,23 @@
 package pe.unmsm.fisi.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pe.unmsm.fisi.dto.Stat;
+import pe.unmsm.fisi.service.StatService;
+
 @Controller
 public class RandomWeatherController {
 
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@Autowired
+	private StatService statService;
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
-	public String index() {
-		return "hello-world";
+	public Stat index() {
+		return statService.getRandomPrecipitationStat();
 	}
 }

@@ -7,4 +7,6 @@ public interface StatDao {
 	public Stat getStatByTypeAndRandomId(int type, int randomId);
 	
 	public void insertStat(Stat stat);
+	
+	public Long getStatCount();
 }

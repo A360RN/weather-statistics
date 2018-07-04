@@ -19,22 +19,38 @@ public class StatDaoImpl implements StatDao {
 
 	@Override
 	public Stat getStatByTypeAndRandomId(int type, int randomId) {
-		// TODO Auto-generated method stub
-		return null;
+		MongoDatabase weatherStatsDb = mongoClient.getDatabase("heroku_7lpvwtth");
+		MongoCollection<Document> weatherCollection = weatherStatsDb.getCollection("WEATHER_STATS");
+		Document statDocument = weatherCollection.find(new Document("randomId", randomId).append("type", type)).first();
+		Stat stat = new Stat();
+		stat.setCountryCode(statDocument.getString("countryCode"));
+		stat.setId(statDocument.getInteger("randomId"));
+		stat.setMonth(statDocument.getInteger("month"));
+		stat.setType(statDocument.getInteger("type"));
+		stat.setStat(statDocument.getDouble("value"));
+		
+		return stat;
 	}
 
 	@Override
 	public void insertStat(Stat stat) {
 		MongoDatabase weatherStatsDb = mongoClient.getDatabase("heroku_7lpvwtth");
 		MongoCollection<Document> weatherCollection = weatherStatsDb.getCollection("WEATHER_STATS");
-		
-		Document document = new Document("countryCode", stat.getCountryCode())
-				.append("type", stat.getType())
-				.append("month", stat.getMonth())
-				.append("randomId", stat.getId())
-				.append("value", stat.getStat());
-		
+
+		Document document = new Document("countryCode", stat.getCountryCode()).append("type", stat.getType())
+				.append("month", stat.getMonth()).append("randomId", stat.getId()).append("value", stat.getStat());
+
 		weatherCollection.insertOne(document);
+	}
+
+	@Override
+	public Long getStatCount() {
+		MongoDatabase weatherStatsDb = mongoClient.getDatabase("heroku_7lpvwtth");
+		MongoCollection<Document> weatherCollection = weatherStatsDb.getCollection("WEATHER_STATS");
+		
+		Long count = weatherCollection.countDocuments();
+		
+		return count;
 	}
 
 }
