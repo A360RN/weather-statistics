@@ -10,7 +10,5 @@ window.onload = () => {
 			document.getElementById('websocketPlaceholder').innerText = `Temperatura: Pais -> ${temperature.countryCode} Mes -> ${temperature.month} Valor -> ${temperature.stat} Precipitación: Pais -> ${precipitation.countryCode} Mes -> ${precipitation.month} Valor -> ${precipitation.stat}`;
 		});
 	});
-	setInterval(() => {
 		stompClient.send("/app/weather", {}, JSON.stringify({'name': 'alonso'}));
-	}, 10000);
 };
