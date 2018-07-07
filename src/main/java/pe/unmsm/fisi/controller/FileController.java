@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mongodb.MongoClient;
-
 import pe.unmsm.fisi.dto.Stat;
 import pe.unmsm.fisi.service.StatService;
 
