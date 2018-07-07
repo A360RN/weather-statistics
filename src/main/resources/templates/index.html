@@ -3,9 +3,39 @@
 <head>
 <title>Weather Statistics</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" th:href="@{css/app/main.css}"></link>
 </head>
 <body>
-	<div id="websocketPlaceholder"></div>
+	<div class="container">
+		<div class="statContainer">
+			<div>
+				<div>
+					<span id="temperatureCountry"></span>
+				</div>
+				<div>
+					<span id="temperatureMonth"></span>
+				</div>
+				<div>
+					<span id="temperatureValue"></span>
+				</div>
+			</div>
+			<div id="temperatureColor"></div>
+		</div>
+		<div class="statContainer">
+			<div>
+				<div>
+					<span id="precipitationCountry"></span>
+				</div>
+				<div>
+					<span id="precipitationMonth"></span>
+				</div>
+				<div>
+					<span id="precipitationValue"></span>
+				</div>
+			</div>
+			<div id="precipitationColor"></div>
+		</div>
+	</div>
 	<script th:src="@{js/lib/sockjs.min.js}"></script>
 	<script th:src="@{js/lib/stomp.min.js}"></script>
 	<script th:src="@{js/app/main.js}"></script>

@@ -20,7 +20,7 @@ public class RandomWeatherController {
 	@Autowired
 	private SimpMessagingTemplate template;
 
-	@Scheduled(initialDelay = 0, fixedRate = 60000)
+	@Scheduled(initialDelay = 0, fixedRate = 10*1000)
 	public void index() {
 		template.convertAndSend("/topic/weather", statService.getRandomStat());
 	}
